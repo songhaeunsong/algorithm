@@ -1,3 +1,3 @@
 function solution(s) {
-  return Number(S);
+  return Number(s);
 }
