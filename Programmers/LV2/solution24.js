@@ -1,3 +1,5 @@
+//의상
+
 function solution(clothes) {
   let clothesNum = clothes.length;
   let clothesObj = {};
