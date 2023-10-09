@@ -1,7 +1,6 @@
 //튜플
 
 function solution(s) {
-  let answer = [];
   let obj = {};
   let arr = [];
   s = s.slice(2, s.length - 2).replace(/},{/g, ",");
