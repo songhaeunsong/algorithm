@@ -11,7 +11,6 @@ var convert = function (s, numRows) {
   }
 
   const rows = new Array(numRows).fill("");
-  console.log(rows);
   let currentRow = 0;
   let goingDown = false;
 
