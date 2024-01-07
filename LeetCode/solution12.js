@@ -5,9 +5,41 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-  // 오름차순 정렬
-  // for문
-  // 현재 인덱스 +1(first) 과 nums.length-1(last) sum 0인지 확인
-  // sum > 0 last--
-  // sum < 0 first++
+  nums.sort((a, b) => a - b);
+
+  let answer = [];
+  let targetIdx = 0;
+  let left = targetIdx + 1;
+  let right = nums.length - 1;
+
+  let moveRight = (cur, idx) => {
+    while (nums[cur] === nums[idx]) {
+      idx++;
+    }
+    return idx;
+  };
+
+  let moveLeft = (cur, idx) => {
+    while (nums[cur] === nums[idx]) {
+      idx--;
+    }
+    return idx;
+  };
+
+  while (nums[targetIdx] <= 0 && targetIdx < nums.length - 2) {
+    const sum = nums[targetIdx] + nums[left] + nums[right];
+    if (sum === 0) {
+      answer.push([nums[targetIdx], nums[left], nums[right]]);
+      left = moveRight(left, left + 1);
+    } else if (sum > 0) right = moveLeft(right, right - 1);
+    else if (sum < 0) left = moveRight(left, left + 1);
+
+    if (left >= right) {
+      targetIdx = moveRight(targetIdx, targetIdx + 1);
+      left = targetIdx + 1;
+      right = nums.length - 1;
+    }
+  }
+
+  return answer;
 };
