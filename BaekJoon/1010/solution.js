@@ -1,3 +1,5 @@
+// 다리 놓기
+
 const fs = require("fs");
 
 const [caseLength, ...fileContent] = fs

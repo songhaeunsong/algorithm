@@ -1,7 +1,7 @@
 // 트리 순회
-
+console.time();
 const fs = require("fs");
-const [num, ...input] = fs.readFileSync("./input.txt").toString().split("\n");
+const [_num, ...input] = fs.readFileSync("./input.txt").toString().split("\n");
 
 const tree = {};
 input.forEach((str) => {
@@ -42,3 +42,4 @@ result += "\n";
 postorder("A");
 
 console.log(result);
+console.timeEnd();
