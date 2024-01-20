@@ -4,9 +4,10 @@ const [num, ...input] = fs.readFileSync("./input.txt").toString().split("\n");
 
 const graph = [];
 
-for (let i = 0; i < num + 1; i++) {
+for (let i = 0; i < Number(num) + 1; i++) {
   graph[i] = [];
 }
+
 const answer = [];
 input.forEach((edge) => {
   const [from, to] = edge.split(" ");
