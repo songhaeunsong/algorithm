@@ -1,30 +1,24 @@
 // 숫자 짝꿍
 
 function solution(X, Y) {
-  let g = [X, Y].sort((a, b) => a.length - b.length);
   let nested = "";
 
-  g = g.map((ele) => {
-    let objCount = ele.split("").reduce((acc, cur) => {
-      acc[cur] = (acc[cur] || 0) + 1;
-      return acc;
-    }, {});
-    return objCount;
-  });
-
-  for (let key of Object.keys(g[0])) {
-    if (g[1][key]) {
-      let count = Math.min(g[0][key], g[1][key]);
-      nested += key.repeat(count);
-    }
+  const countY = {};
+  for (let i = 0; i < Y.length; i++) {
+    const Ynum = Y[i];
+    countY[Ynum] = (countY[Ynum] || 0) + 1;
   }
 
-  nested = nested
-    .split("")
-    .sort((a, b) => b - a)
-    .join("");
+  const XArr = X.split("").sort((a, b) => b - a);
 
-  if (nested[0] === undefined) return "-1";
-  else if (nested[0] === "0") return "0";
-  else return nested;
+  for (let i = 0; i < X.length; i++) {
+    const Xnum = XArr[i];
+    if (countY[Xnum] && countY[Xnum] > 0) {
+      nested += Xnum;
+      countY[Xnum]--;
+    }
+    if (nested === "0") return "0";
+  }
+
+  return nested.length > 0 ? nested : "-1";
 }
