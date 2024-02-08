@@ -1,4 +1,4 @@
-// 2178 미로 탐색
+// 미로 탐색
 
 const fs = require("fs");
 const [nums, ...input] = fs.readFileSync("./input.txt").toString().split("\n");
