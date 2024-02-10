@@ -1,4 +1,4 @@
-// 유기농 배추
+// 유기농 배추 BFS 풀이
 
 const fs = require("fs");
 const [testCase, ...fileContent] = fs
