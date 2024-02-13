@@ -1,4 +1,4 @@
-// 피보나치 함수
+// 피보나치함수
 
 const fs = require("fs");
 const [T, ...input] = fs
