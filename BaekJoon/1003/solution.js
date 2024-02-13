@@ -1,38 +1,29 @@
 // 피보나치 함수
 
 const fs = require("fs");
-const input = fs
+const [T, ...input] = fs
   .readFileSync("./input.txt")
   .toString()
-  .replace(/\r/g, "")
   .trim()
-  .split("\n");
+  .split("\n")
+  .map(Number);
 
 const memory = [];
-fibonacci(40);
+memory[0] = [1, 0];
+memory[1] = [0, 1];
 
-input.shift();
-while (input.length > 0) {
-  const idx = input.shift();
-  console.log(memory[idx].join(" "));
-}
-
-function fibonacci(n) {
-  if (memory[n]) return memory[n];
-
-  if (n === 0) {
-    memory[n] = [1, 0];
-  } else if (n === 1) {
-    memory[n] = [0, 1];
-  } else {
-    if (!memory[n - 1]) fibonacci(n - 1);
-    if (!memory[n - 2]) fibonacci(n - 2);
-
-    memory[n] = [
-      memory[n - 1][0] + memory[n - 2][0],
-      memory[n - 1][1] + memory[n - 2][1],
-    ];
+function fibonacci(num) {
+  if (memory[num]) return memory[num].join(" ");
+  for (let i = 2; i <= num; i++) {
+    const one = memory[i - 1][0] + memory[i - 2][0];
+    const zero = memory[i - 1][1] + memory[i - 2][1];
+    memory[i] = [one, zero];
   }
-
-  return memory[n];
+  return memory[num].join(" ");
 }
+
+let answer = input.map((num) => {
+  return fibonacci(num);
+});
+
+console.log(answer.join("\n"));
