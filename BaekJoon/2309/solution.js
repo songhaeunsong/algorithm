@@ -1,3 +1,5 @@
+// 일곱 난쟁이
+
 const fs = require("fs");
 const input = fs
   .readFileSync("./input.txt")
