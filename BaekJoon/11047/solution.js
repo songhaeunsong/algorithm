@@ -1,3 +1,4 @@
+// 동전 0
 const fs = require("fs");
 const [n, ...input] = fs.readFileSync("./input.txt").toString().split("\n");
 let [N, K] = n.split(" ").map(Number);
