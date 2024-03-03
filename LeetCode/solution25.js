@@ -12,7 +12,6 @@
  * @param {number} n
  * @return {ListNode}
  */
-
 const removeNthFromEnd = function (head, n) {
   const list = new ListNode(0);
   list.next = head;
