@@ -1,3 +1,5 @@
+// 영역 구하기
+
 const fs = require("fs");
 const [nums, ...input] = fs.readFileSync("./input.txt").toString().split("\n");
 const [M, N, k] = nums.split(" ").map(Number);
