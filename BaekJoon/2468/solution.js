@@ -1,4 +1,4 @@
-// 안전 영역
+//안전 영역
 
 const fs = require("fs");
 const [num, ...graph] = fs
@@ -8,6 +8,7 @@ const [num, ...graph] = fs
   .split("\n")
   .map((v) => v.split(" ").map(Number));
 
+console.log(num);
 const N = Number(num);
 
 const dx = [1, 0, -1, 0];
