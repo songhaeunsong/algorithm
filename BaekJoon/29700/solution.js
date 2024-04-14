@@ -4,6 +4,8 @@
 // 1 <= M <= 5000
 // 1 <= K <= 10
 
+// 결과: 79836 KB, 384 ms
+
 const fs = require("fs");
 const fileContent = fs
   .readFileSync("./input.txt")
