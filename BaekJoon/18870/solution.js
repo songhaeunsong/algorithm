@@ -1,3 +1,5 @@
+// 좌표 압축
+
 const fs = require("fs");
 const [, input] = fs.readFileSync("./input.txt").toString().split("\n");
 const numbers = input.split(" ").map(Number);
