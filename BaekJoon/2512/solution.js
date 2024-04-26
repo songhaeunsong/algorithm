@@ -1,3 +1,5 @@
+// 예산
+
 const fs = require("fs");
 const inputLines = fs.readFileSync("./input.txt").toString().split("\n");
 
