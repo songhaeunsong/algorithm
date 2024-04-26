@@ -1,3 +1,5 @@
+// 용돈 관리
+
 const fs = require("fs");
 const inputLines = fs.readFileSync("./input.txt").toString().split("\n");
 const [N, M] = inputLines.shift().split(" ").map(Number);
