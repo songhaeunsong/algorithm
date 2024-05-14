@@ -3,7 +3,7 @@
 //  (3 ≤ N ≤ 50)
 
 const fs = require("fs");
-const inputLines = fs.readFileSync(0).toString().trim().split("\n");
+const inputLines = fs.readFileSync("./input.txt").toString().trim().split("\n");
 const N = +inputLines.shift();
 const input = inputLines.map((row) => row.split(""));
 
@@ -34,25 +34,29 @@ function countMaxLength(graph) {
   let maxLength = 0;
 
   for (let i = 0; i < N; i++) {
-    let valueOfRow = 1;
-    let keyOfRow = graph[i][0];
-    let valueOfColumn = 1;
-    let keyOfColumn = graph[0][i];
+    let rowCount = 1;
+    let colCount = 1;
+
     for (let j = 1; j < N; j++) {
-      if (graph[i][j] === keyOfRow) valueOfRow++;
-      else {
-        keyOfRow = graph[i][j];
-        maxLength = Math.max(maxLength, valueOfRow);
-        valueOfRow = 1;
+      // 행 검사
+      if (graph[i][j] === graph[i][j - 1]) {
+        rowCount++;
+      } else {
+        maxLength = Math.max(maxLength, rowCount);
+        rowCount = 1;
       }
-      if (graph[j][i] === keyOfColumn) valueOfColumn++;
-      else {
-        keyOfColumn = graph[j][i];
-        maxLength = Math.max(maxLength, valueOfColumn);
-        valueOfColumn = 1;
+
+      // 열 검사
+      if (graph[j][i] === graph[j - 1][i]) {
+        colCount++;
+      } else {
+        maxLength = Math.max(maxLength, colCount);
+        colCount = 1;
       }
     }
-    maxLength = Math.max(maxLength, valueOfColumn, valueOfRow);
+
+    maxLength = Math.max(maxLength, rowCount, colCount);
   }
+
   return maxLength;
 }
