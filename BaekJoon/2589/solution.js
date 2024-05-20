@@ -1,3 +1,5 @@
+// 보물섬
+
 const fs = require("fs");
 let [nums, ...input] = fs
   .readFileSync("./input.txt")
