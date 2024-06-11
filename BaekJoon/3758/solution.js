@@ -1,4 +1,4 @@
-// KCPC
+// KCPC (구현 - 정렬)
 
 const fs = require("fs");
 const [N, ...input] = fs.readFileSync("./input.txt").toString().split("\n");
