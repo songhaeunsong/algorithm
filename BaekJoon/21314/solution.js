@@ -26,17 +26,15 @@ for (let i = 0; i < max.length; i++) {
   if (chars === "K") maxDecimal += "5";
   else if (chars[chars.length - 1] === "K") {
     maxDecimal += "5";
-    for (let m = 0; m < chars.length - 1; m++) maxDecimal += "0";
-  } else {
-    for (let m = 0; m < chars.length; m++) maxDecimal += "1";
-  }
+    maxDecimal += "0".repeat(chars.length - 1);
+  } else maxDecimal += "1".repeat(chars.length);
 }
 for (let i = 0; i < min.length; i++) {
   let chars = min[i];
   if (chars === "K") minDecimal += "5";
   else {
     minDecimal += "1";
-    for (let m = 0; m < chars.length - 1; m++) minDecimal += "0";
+    minDecimal += "0".repeat(chars.length - 1);
   }
 }
 
