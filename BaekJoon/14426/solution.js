@@ -1,32 +1,37 @@
+// 접두사 찾기
+
 const fs = require("fs");
-const fileContent = fs.readFileSync("./input.txt").toString().split("\n");
-const [N, M] = fileContent[0].split(" ").map(Number);
-const words = fileContent.slice(1, N + 1).sort();
-const tests = fileContent.slice(N + 1);
+const fileContents = fs.readFileSync("./input.txt").toString().trim().split("\n").map(line=> line.trim());
+const [N, _] = fileContents[0].split(" ").map(Number);
+const words = fileContents.slice(1, N+1).sort();
+const queries = fileContents.slice(N+1);
 
-let count = 0;
+let totalCount = 0;
 
-function binarySearch(test) {
-  let left = 0;
-  let right = N - 1;
-  while (left <= right) {
-    const target = Math.floor((left + right) / 2);
-    const slicedWord = words[target].slice(0, test.length);
-    if (test === slicedWord) {
-      count++;
-      return;
-    }
-    if (words[target] < test) {
-      left++;
-    } else {
-      right--;
-    }
-  }
-  return;
+for (const prefix of queries) {
+        if (binarySearch(words, prefix)) {
+          totalCount++;
+        }
 }
 
-for (let test of tests) {
-  binarySearch(test);
-}
+console.log(totalCount);
 
-console.log(count);
+function binarySearch(arr, prefix) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        const isPrefix = arr[mid].startsWith(prefix);
+
+        if (isPrefix) {
+            return true;
+        } else if (arr[mid] < prefix) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return false;
+}
