@@ -75,8 +75,6 @@ for (const temp of input) {
   let to = temp[1];
   let cost = temp[2];
 
-  //   edges[from][to] = Math.max(edges[from][to] || 0, cost);
-  //   edges[to][from] = Math.max(edges[to][from] || 0, cost);
   edges[from].push([to, cost]);
   edges[to].push([from, cost]);
 }
@@ -85,15 +83,11 @@ pq.add([start, Infinity]);
 dist[start] = Infinity;
 
 while (pq.size() > 0) {
-  //   console.log(pq);
   const [to, cost] = pq.poll();
 
+  if (to === end) break;
   if (dist[to] > cost) continue;
-  //   for (const key in edges[to]) {
   for (const [nextTo, nextCost] of edges[to]) {
-    // const nextTo = +key;
-    // const nextCost = edges[to][key];
-    // console.log(nextTo, nextCost);
     const target = Math.min(cost, nextCost);
     if (dist[nextTo] < target) {
       dist[nextTo] = target;
