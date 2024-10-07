@@ -1,44 +1,54 @@
 const fs = require("fs");
 const input = fs.readFileSync(0).toString().trim().split("\n");
-const [n, m] = input.shift().split(" ").map(Number);
-const adj = Array.from({ length: n + 1 }, () => []);
-const adjR = Array.from({ length: n + 1 }, () => []);
+let [n, m] = input[0].split(" ").map(Number);
+let adj = new Map();
+let adjR = new Map();
 
-for (let i = 0; i < m; i++) {
-  const [x, y] = input.shift().split(" ").map(Number);
-  adj[x].push(y);
-  adjR[y].push(x);
+for (let i = 1; i <= m; i++) {
+  let [x, y] = input[i].split(" ").map(Number);
+  if (!adj.has(x)) adj.set(x, []);
+  if (!adjR.has(y)) adjR.set(y, []);
+  adj.get(x).push(y);
+  adjR.get(y).push(x);
 }
 
-const [s, t] = input.shift().split(" ").map(Number);
+let [s, t] = input[m + 1].split(" ").map(Number);
 
-const fromS = new Array(n + 1).fill(0);
+let fromS = new Array(n + 1).fill(0);
+let fromT = new Array(n + 1).fill(0);
+let toS = new Array(n + 1).fill(0);
+let toT = new Array(n + 1).fill(0);
+
 fromS[t] = 1;
 dfs(s, adj, fromS);
 
-const fromT = new Array(n + 1).fill(0);
 fromT[s] = 1;
 dfs(t, adj, fromT);
 
-const toS = new Array(n + 1).fill(0);
 dfs(s, adjR, toS);
-
-const toT = new Array(n + 1).fill(0);
 dfs(t, adjR, toT);
 
-let count = 0;
+let cnt = 0;
 for (let i = 1; i <= n; i++) {
   if (fromS[i] === 1 && fromT[i] === 1 && toS[i] === 1 && toT[i] === 1) {
-    count++;
+    cnt++;
   }
 }
 
-console.log(count - 2);
+console.log(cnt - 2);
 
-function dfs(now, adj, visit) {
-  if (visit[now] === 1) return;
-  visit[now] = 1;
-  for (const next of adj[now]) {
-    dfs(next, adj, visit);
+function dfs(start, adjMap, visit) {
+  let stack = [start];
+  while (stack.length > 0) {
+    let now = stack.pop();
+    if (visit[now] === 1) continue;
+    visit[now] = 1;
+    if (adjMap.has(now)) {
+      for (let next of adjMap.get(now)) {
+        if (visit[next] === 0) {
+          stack.push(next);
+        }
+      }
+    }
   }
 }
