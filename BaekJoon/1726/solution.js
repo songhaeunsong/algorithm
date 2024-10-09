@@ -20,7 +20,9 @@ const directionChanges = [
   [1, 1, 2, 0],
 ];
 
-const visited = Array.from({ length: N }, () => new Array(M).fill(Infinity));
+const visited = Array.from({ length: N }, () =>
+  Array.from({ length: M }, () => new Array(4).fill(Infinity))
+);
 
 bfs();
 console.log(min);
@@ -29,34 +31,34 @@ function bfs() {
   const queue = [[startx, starty, sdirection, 0]];
   let head = 0;
 
-  visited[startx][starty] = 0;
+  visited[startx][starty][sdirection] = 0;
 
   while (queue.length > head) {
     const [x, y, d, count] = queue[head++];
 
-    if (x === goalx && y === goaly) {
-      min = Math.min(min, count + directionChanges[d][gdirection]);
+    if (x === goalx && y === goaly && d === gdirection) {
+      min = Math.min(min, count);
       continue;
     }
 
     for (let i = 0; i < 4; i++) {
-      for (let j = 1; j <= 3; j++) {
-        const [nx, ny] = [x + dx[i] * j, y + dy[i] * j];
-        const ncount = count + directionChanges[d][i] + 1;
+      const ncount = count + directionChanges[d][i];
+      if (visited[x][y][i] > ncount) {
+        visited[x][y][i] = ncount;
+        queue.push([x, y, i, ncount]);
+      }
+    }
 
-        if (
-          nx < 0 ||
-          nx >= N ||
-          ny < 0 ||
-          ny >= M ||
-          visited[nx][ny] <= ncount ||
-          board[nx][ny]
-        )
-          break;
+    for (let j = 1; j <= 3; j++) {
+      const [nx, ny] = [x + dx[d] * j, y + dy[d] * j];
 
-        visited[nx][ny] = ncount;
+      if (nx < 0 || nx >= N || ny < 0 || ny >= M || board[nx][ny]) break;
 
-        queue.push([nx, ny, i, ncount]);
+      if (visited[nx][ny][d] > count + 1) {
+        visited[nx][ny][d] = count + 1;
+        // console.log([x, y, d, count]);
+        // console.log([nx, ny, d, count + 1]);
+        queue.push([nx, ny, d, count + 1]);
       }
     }
   }
