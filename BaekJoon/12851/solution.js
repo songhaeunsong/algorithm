@@ -40,7 +40,7 @@ function bfs(start) {
             minTime = nextCount;
             flag = true;
           }
-        } else if (visited[n] === -1 || visited[n] > nextCount) {
+        } else if (visited[n] === -1 || visited[n] >= nextCount) {
           visited[n] = nextCount;
           queue.push([n, nextCount]);
         }
