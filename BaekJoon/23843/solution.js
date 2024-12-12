@@ -1,3 +1,5 @@
+// 콘센트
+
 class MinHeap {
   constructor() {
     this.heap = [];
@@ -52,4 +54,37 @@ class MinHeap {
       right = (idx + 1) * 2;
     }
   }
+}
+
+const fs = require("fs");
+const [[N, M], input] = fs
+  .readFileSync(0)
+  .toString()
+  .trim()
+  .split("\n")
+  .map((line) => line.split(" ").map(Number));
+
+input.sort((a, b) => b - a);
+console.log(main());
+
+function main() {
+  if (N <= M) return input[0];
+
+  const pq = new MinHeap();
+
+  for (const time of input) {
+    if (pq.size() < M) {
+      pq.add(time);
+      continue;
+    }
+    const prev = pq.poll();
+    pq.add(prev + time);
+  }
+
+  let max = 0;
+  for (let i = 0; i < M; i++) {
+    max = Math.max(max, pq.poll());
+  }
+
+  return max;
 }
