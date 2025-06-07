@@ -10,10 +10,13 @@ for (let i = 0; i < 10; i++) {
 }
 for (let i = 2; i < n + 1; i++) {
   for (let j = 0; j < 10; j++) {
-    for (let prev = j; prev >= 0; prev--) {
-      dp[i][j] = (dp[i][j] + dp[i - 1][prev]) % INF;
+    if (j === 0) {
+      dp[i][j] = 1;
+      continue;
     }
+    dp[i][j] = (dp[i - 1][j] + dp[i][j - 1]) % INF;
   }
 }
 
+console.log(dp[3]);
 console.log(dp[n].reduce((acc, cur) => (acc + cur) % INF, 0));
