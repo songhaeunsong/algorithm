@@ -16,7 +16,7 @@ class MaxHeap {
     this.bubbleUp();
   }
   poll() {
-    if (this.heap.length === 0) return this.heap.pop();
+    if (this.heap.length === 1) return this.heap.pop();
     const value = this.heap[0];
     this.heap[0] = this.heap.pop();
     this.bubbleDown();
