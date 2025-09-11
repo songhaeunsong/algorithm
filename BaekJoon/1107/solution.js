@@ -1,4 +1,4 @@
-// https://www.acmicpc.net/problem/1107
+// 리모컨
 
 const fs = require("fs");
 const [goal, N, notWorkingOnes] = fs
